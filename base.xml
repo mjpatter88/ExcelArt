@@ -34,37 +34,11 @@
   <Style ss:ID="s62">
    <Interior ss:Color="#513B63" ss:Pattern="Solid"/>
   </Style>
-  <Style ss:ID="s63">
-   <Interior ss:Color="#7BB83E" ss:Pattern="Solid"/>
-  </Style>
-  <Style ss:ID="s66">
-   <Interior ss:Color="#800080" ss:Pattern="Solid"/>
-  </Style>
-  <Style ss:ID="s67">
-   <Interior ss:Color="#FF0000" ss:Pattern="Solid"/>
-  </Style>
-  <Style ss:ID="s68">
-   <Interior ss:Color="#5600AD" ss:Pattern="Solid"/>
-  </Style>
  </Styles>
  <Worksheet ss:Name="Sheet1">
   <Table ss:ExpandedColumnCount="5" ss:ExpandedRowCount="13" x:FullColumns="1"
    x:FullRows="1" ss:DefaultRowHeight="15">
-   <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s62"/>
-   </Row>
-   <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="3" ss:StyleID="s63"/>
-   </Row>
-   <Row ss:Index="3" ss:AutoFitHeight="0">
-    <Cell ss:Index="4" ss:StyleID="s68"/>
-   </Row>
-   <Row ss:Index="6" ss:AutoFitHeight="0">
-    <Cell ss:Index="3" ss:StyleID="s66"/>
-   </Row>
-   <Row ss:Index="13" ss:AutoFitHeight="0">
-    <Cell ss:Index="5" ss:StyleID="s67"/>
-   </Row>
+   
    
   </Table>
   <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
