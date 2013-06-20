@@ -10,6 +10,9 @@ figured out. My plan is to write python that directly modifies the xml file to g
 
 base.xml contains the Excel generated xml with a few colored cells for reference.
 
+I'm using the ElementTree library (part of the standard lib) and more info is here: 
+http://www.diveintopython3.net/xml.html
+
 Quirks:
 Excel handles the background coloring by first creating a style in the <Styles> block, it then uses this
 style ID to apply it to a cell in the <Table> block. I'm not sure if there is a limit on the number of
@@ -20,17 +23,44 @@ It starts at 1. It is grouped by rows, and they must be in numerical order. If a
 present, then it defaults to one greater than the previous one, or 1 if no previous one.
 '''
 
+import xml.etree.ElementTree as ET
+
+xml = None
+DEBUG = True
 
 def read_image():
 	pass
 
 def generate_excel_doc():
+	xml.write("Test.xml")
 	pass
 
+def add_style():
+	'''
+	This function adds a style to the xml tree.
+	'''
+	root = xml.getroot()
+	styles = root.find("{urn:schemas-microsoft-com:office:spreadsheet}Styles")
+	
+	if DEBUG:
+		print "Parent Element: ", styles
+		print "Number of styles: ", len(styles)
+		for child in styles:
+			print(child.get("{urn:schemas-microsoft-com:office:spreadsheet}ID"))
+
+	#Figure out how to append an element to the "styles" element with the correct attirbutes set.
+	return
+
 def run():
-	read_image()
+	global xml
+
+	xml = ET.parse("base.xml")
+	add_style()
+
+	# read_image()
 	generate_excel_doc()
-	pass
+
+	return 0
 
 
 
