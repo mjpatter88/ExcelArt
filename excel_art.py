@@ -33,12 +33,27 @@ def read_image():
 
 def generate_excel_doc():
 	xml.write("Test.xml")
+	# We need the following lines to prepend the two starting lines to the xml so it's recognized as an Excel file
+	f = open("Test.xml")
+	temp = f.read()
+	f.close()
+	f = open("Test.xml", 'w')
+	f.write("<?xml version=\"1.0\"?>\n")
+	f.write("<?mso-application progid=\"Excel.Sheet\"?>\n")
+	f.write(temp)
+	f.close()
 	pass
 
-def add_style():
+def add_style(id, color):
 	'''
-	This function adds a style to the xml tree.
+	This function adds a style to the xml tree. The following shows the format. I believe the styles start at ID=s62
+	
+	<Style ss:ID="s68">
+   		<Interior ss:Color="#5600AD" ss:Pattern="Solid"/>
+  	</Style>
+
 	'''
+
 	root = xml.getroot()
 	styles = root.find("{urn:schemas-microsoft-com:office:spreadsheet}Styles")
 	
@@ -48,14 +63,35 @@ def add_style():
 		for child in styles:
 			print(child.get("{urn:schemas-microsoft-com:office:spreadsheet}ID"))
 
-	#Figure out how to append an element to the "styles" element with the correct attirbutes set.
+	#Append the new style with the correct ID
+	id_str = "s" + str(id)
+	print id_str
+	new_style = ET.SubElement(styles, "{urn:schemas-microsoft-com:office:spreadsheet}Style", 
+									{"{urn:schemas-microsoft-com:office:spreadsheet}ID": "s70"})
+	#Append the sub-element to the new style
+	ET.SubElement(new_style, "{urn:schemas-microsoft-com:office:spreadsheet}Interior", 
+									{"{urn:schemas-microsoft-com:office:spreadsheet}Color": "#123456",
+									 "{urn:schemas-microsoft-com:office:spreadsheet}Pattern": "Solid"})
 	return
+
+def style_cell(row, col, style_id):
+	'''
+	This function colors the cell at row, col with the specified style. It can only be called once per cell, and the
+	style must already exist.
+	'''
+	pass
+
+def test():
+	'''
+	A test function that creates a spreadsheet 50x50 with a different color in each cell
+	'''
+	pass
 
 def run():
 	global xml
 
 	xml = ET.parse("base.xml")
-	add_style()
+	add_style(70, "#123456")
 
 	# read_image()
 	generate_excel_doc()
